@@ -162,7 +162,9 @@ module.exports = (app, { getRouter }) => {
     } = config
 
     const shouldIncludePreReleases = Boolean(
-      includePreReleases || preReleaseIdentifier
+      includePreReleases !== undefined
+        ? includePreReleases
+        : preReleaseIdentifier
     )
 
     const { draftRelease, lastRelease } = await findReleases({
