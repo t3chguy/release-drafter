@@ -162,24 +162,24 @@ module.exports = (app, { getRouter }) => {
     } = config
 
     const shouldIncludePreReleases = Boolean(
-      includePreReleases !== undefined
-        ? includePreReleases
-        : preReleaseIdentifier
+      includePreReleases || preReleaseIdentifier
     )
 
-    const { draftRelease, lastRelease } = await findReleases({
-      context,
-      targetCommitish,
-      filterByCommitish,
-      includePreReleases: shouldIncludePreReleases,
-      tagPrefix,
-    })
+    const { draftRelease, lastRelease, lastStableRelease } = await findReleases(
+      {
+        context,
+        targetCommitish,
+        filterByCommitish,
+        includePreReleases: shouldIncludePreReleases,
+        tagPrefix,
+      }
+    )
 
     const { commits, pullRequests: mergedPullRequests } =
       await findCommitsWithAssociatedPullRequests({
         context,
         targetCommitish,
-        lastRelease,
+        lastRelease: lastStableRelease,
         config,
       })
 
