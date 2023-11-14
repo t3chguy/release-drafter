@@ -172,6 +172,7 @@ module.exports = (app, { getRouter }) => {
         filterByCommitish,
         includePreReleases: shouldIncludePreReleases,
         tagPrefix,
+        previousVersion: input.previousVersion,
       }
     )
 
@@ -255,6 +256,7 @@ function getInput() {
         : undefined,
     preReleaseIdentifier: core.getInput('prerelease-identifier') || undefined,
     latest: core.getInput('latest')?.toLowerCase() || undefined,
+    previousVersion: core.getInput('previous-version') || undefined,
   }
 }
 
