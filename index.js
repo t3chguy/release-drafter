@@ -190,7 +190,7 @@ module.exports = (app, { getRouter }) => {
       config['sort-direction']
     )
 
-    const { shouldDraft, version, tag, name } = input
+    const { shouldDraft, version, tag, name, versionKeyIncrement } = input
 
     const releaseInfo = generateReleaseInfo({
       context,
@@ -205,6 +205,7 @@ module.exports = (app, { getRouter }) => {
       latest,
       shouldDraft,
       targetCommitish,
+      versionKeyIncrement,
     })
 
     let createOrUpdateReleaseResponse
@@ -257,6 +258,7 @@ function getInput() {
     preReleaseIdentifier: core.getInput('prerelease-identifier') || undefined,
     latest: core.getInput('latest')?.toLowerCase() || undefined,
     previousVersion: core.getInput('previous-version') || undefined,
+    versionKeyIncrement: core.getInput('version-key-increment') || undefined,
   }
 }
 
