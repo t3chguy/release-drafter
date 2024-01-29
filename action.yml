@@ -32,6 +32,9 @@ inputs:
     description: |
       The previous version to use as the latest release.
     required: false
+  version-key-increment:
+    description: Force the given version increment.
+    required: false
   publish:
     description: |
       A boolean indicating whether the release being created or updated should be immediately published.
