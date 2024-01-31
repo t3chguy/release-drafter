@@ -159,28 +159,27 @@ module.exports = (app, { getRouter }) => {
       'tag-prefix': tagPrefix,
       latest,
       prerelease,
+      'stable-ref': stableRef,
+      'staging-ref': stagingRef,
     } = config
 
     const shouldIncludePreReleases = Boolean(
       includePreReleases || preReleaseIdentifier
     )
 
-    const { draftRelease, lastRelease, lastStableRelease } = await findReleases(
-      {
-        context,
-        targetCommitish,
-        filterByCommitish,
-        includePreReleases: shouldIncludePreReleases,
-        tagPrefix,
-        previousVersion: input.previousVersion,
-      }
-    )
+    const { draftRelease, lastRelease } = await findReleases({
+      context,
+      targetCommitish,
+      filterByCommitish,
+      includePreReleases: shouldIncludePreReleases,
+      tagPrefix,
+    })
 
     const { commits, pullRequests: mergedPullRequests } =
       await findCommitsWithAssociatedPullRequests({
         context,
-        targetCommitish,
-        lastRelease: lastStableRelease,
+        stableRef,
+        stagingRef,
         config,
       })
 
