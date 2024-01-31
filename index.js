@@ -159,8 +159,6 @@ module.exports = (app, { getRouter }) => {
       'tag-prefix': tagPrefix,
       latest,
       prerelease,
-      'stable-ref': stableRef,
-      'staging-ref': stagingRef,
     } = config
 
     const shouldIncludePreReleases = Boolean(
@@ -178,8 +176,6 @@ module.exports = (app, { getRouter }) => {
     const { commits, pullRequests: mergedPullRequests } =
       await findCommitsWithAssociatedPullRequests({
         context,
-        stableRef,
-        stagingRef,
         config,
       })
 
